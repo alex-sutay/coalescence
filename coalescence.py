@@ -79,6 +79,15 @@ def main():
             out_str += f'Could not find the file "{filename}"\n{"-"*100}\n'
             continue
 
+        # todo check for filetype
+        """
+        We could add a function that uses os.path.splitext() to get the file extension
+        but also could mix in mimetypes.guess_extension() and check to see if they
+        match, and maybe output that the file extension has been attempted to be hidden. 
+        Once this is determined the program will change what tools are ran against the 
+        file. Just an idea though.
+        """
+
         # exiftool
         if args.exiftool or args.all:
             print('Running exiftool...')
