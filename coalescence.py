@@ -8,7 +8,8 @@ def exiftool(filename):
     :param filename: the path to the file
     :return: string output
     """
-    return 'exiftool'
+    result = os.system(".\\tools\\exiftool.exe " + "\"" + filename + "\"")
+    return result
     # todo
 
 
