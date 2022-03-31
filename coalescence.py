@@ -1,6 +1,6 @@
 import argparse
 import os
-
+import subprocess
 
 def exiftool(filename):
     """
@@ -8,9 +8,17 @@ def exiftool(filename):
     :param filename: the path to the file
     :return: string output
     """
-    result = os.system(".\\tools\\exiftool.exe " + "\"" + filename + "\"")
+    result = subprocess.run(("exiftool", "--ExifToolVersion", "--Directory", "--FileType", "--MimeType", filename), capture_output=True, text=True).stdout
     return result
-    # todo
+
+def filetype(filename):
+    """
+    Run exiftool against the file to get the filetype only
+    :param filename: the path to the file
+    :return: string output
+    """
+    result = subprocess.run(("exiftool", "-b", "-FileTypeExtension", filename), capture_output=True, text=True).stdout
+    return result
 
 
 def jhead(filename):
