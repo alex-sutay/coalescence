@@ -1,0 +1,6 @@
+sudo apt-get install exiftool -y
+sudo apt-get install jhead -y
+sudo apt-get install poppler-utils -y
+sudo apt-get install ruby-full -y
+sudo apt-get install gem -y
+sudo gem install origami
