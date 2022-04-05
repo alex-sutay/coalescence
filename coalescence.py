@@ -37,8 +37,8 @@ def pdfinfo(filename):
     :param filename: the path to the file
     :return: string output
     """
-    return 'pdfinfo'
-    # todo
+    result = subprocess.run(("pdfinfo", "-meta", filename), capture_output=True, text=True)).stdout
+    return result
 
 
 def origami(filename):
