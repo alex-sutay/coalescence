@@ -2,6 +2,7 @@ import argparse
 import os
 import subprocess
 
+
 def exiftool(filename):
     """
     Run exiftool against the file
@@ -10,6 +11,7 @@ def exiftool(filename):
     """
     result = subprocess.run(("exiftool", "--ExifToolVersion", "--Directory", "--FileType", "--MimeType", filename), capture_output=True, text=True).stdout
     return result
+
 
 def filetype(filename):
     """
@@ -37,7 +39,7 @@ def pdfinfo(filename):
     :param filename: the path to the file
     :return: string output
     """
-    result = subprocess.run(("pdfinfo", "-meta", filename), capture_output=True, text=True)).stdout
+    result = subprocess.run(("pdfinfo", "-meta", filename), capture_output=True, text=True).stdout
     return result
 
 
@@ -47,8 +49,8 @@ def origami(filename):
     :param filename: the path to the file
     :return: string output
     """
-    return 'origami'
-    # todo
+    result = subprocess.run(('./tools/pdfcop', filename), capture_output=True, text=True).stdout
+    return result
 
 
 def main():
