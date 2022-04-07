@@ -29,8 +29,8 @@ def jhead(filename):
     :param filename: the path to the file
     :return: string output
     """
-    return 'jhead'
-    # todo
+    result = subprocess.run(("jhead", filename), capture_output=True, text=True).stdout
+    return result
 
 
 def pdfinfo(filename):
