@@ -97,6 +97,7 @@ def main():
         Once this is determined the program will change what tools are ran against the 
         file. Just an idea though.
         """
+        file_type = filetype(filename)
 
         # exiftool
         if args.exiftool or args.all:
@@ -114,7 +115,7 @@ def main():
                 out_str += '-' * 100 + '\n'
 
         # jhead
-        if args.jhead or args.all:
+        if args.jhead or (args.all and file_type == 'JPG'):
             print('Running jhead...')
             out_str += 'Results from jhead:\n'
             try:
@@ -129,7 +130,7 @@ def main():
                 out_str += '-' * 100 + '\n'
 
         # pdfinfo
-        if args.pdfinfo or args.all:
+        if args.pdfinfo or (args.all and file_type == 'PDF'):
             print('Running pdfinfo...')
             out_str += 'Results from pdfinfo:\n'
             try:
@@ -144,7 +145,7 @@ def main():
                 out_str += '-' * 100 + '\n'
 
         # origami
-        if args.origami or args.all:
+        if args.origami or (args.all and file_type == 'PDF'):
             print('Running origami...')
             out_str += 'Results from origami:\n'
             try:
