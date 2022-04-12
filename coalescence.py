@@ -19,8 +19,14 @@ def filetype(filename):
     :param filename: the path to the file
     :return: string output
     """
-    result = subprocess.run(("exiftool", "-b", "-FileTypeExtension", filename), capture_output=True, text=True).stdout
-    return result
+    exifType = subprocess.run(("exiftool", "-b", "-FileTypeExtension", filename), capture_output=True, text=True).stdout
+    osType = ((os.path.splitext(filename))[1])[1:]
+    if exifType.lower() == osType.lower():
+        print("Filetype not mismatched")
+    else:
+        print("!!! Filetype mismatched, the document is labeled " + osType + " but is actually " + exifType + " !!!")
+    print()
+    return exifType
 
 
 def jhead(filename):
@@ -53,7 +59,7 @@ def origami(filename):
     :param filename: the path to the file
     :return: string output
     """
-    result = subprocess.run(('./tools/pdfcop', filename), capture_output=True, text=True).stdout
+    result = subprocess.run(('pdfcop', filename), capture_output=True, text=True).stdout
     return result
 
 
@@ -93,14 +99,6 @@ def main():
             out_str += f'Could not find the file "{filename}"\n{"-"*100}\n'
             continue
 
-        # todo check for filetype
-        """
-        We could add a function that uses os.path.splitext() to get the file extension
-        but also could mix in mimetypes.guess_extension() and check to see if they
-        match, and maybe output that the file extension has been attempted to be hidden. 
-        Once this is determined the program will change what tools are ran against the 
-        file. Just an idea though.
-        """
         file_type = filetype(filename)
 
         # exiftool
