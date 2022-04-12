@@ -39,9 +39,13 @@ def pdfinfo(filename):
     :param filename: the path to the file
     :return: string output
     """
-    result = subprocess.run(("pdfinfo", "-meta", filename), capture_output=True, text=True).stdout
-    return result
-
+    result = subprocess.run(("pdfinfo", filename), capture_output=True, text=True).stdout
+    yn = input("Do you wish to see the file's metadata?")
+    if(yn=="y" or yn=="yes" or yn=="Yes" or yn=="YES"):
+        result += subprocess.run(("pdfinfo", "-meta", filename), capture_output=True, text=True).stdout
+        return result
+    else:
+        return result
 
 def origami(filename):
     """
